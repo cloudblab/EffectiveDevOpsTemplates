@@ -33,7 +33,7 @@ from awacs.sts import AssumeRole
 ApplicationName = "jenkins"
 ApplicationPort = "8080"
 
-GithubAccount = "EffectiveDevOpsWithAWS"
+GithubAccount = "cloudblab"
 GithubAnsibleURL = "https://github.com/{}/ansible".format(GithubAccount)
 
 AnsiblePullCmd = \
@@ -93,21 +93,6 @@ t.add_resource(Role(
             )
         ]
     )
-))
-
-t.add_resource(IAMPolicy(
-    "Policy",
-    PolicyName="AllowCodePipeline",
-    PolicyDocument=Policy(
-        Statement=[
-            Statement(
-                Effect=Allow,
-                Action=[Action("codepipeline", "*")],
-                Resource=["*"]
-            )
-        ]
-    ),
-    Roles=[Ref("Role")]
 ))
 
 t.add_resource(InstanceProfile(
